@@ -9,15 +9,15 @@ class connect {
         $this->hostname = 'localhost';
         $this->db_username = 'root';
         $this->db_password = '';
-        $this->dbname = 'localhost';
+        $this->dbname = 'messagegram';
 
         $conn = new mysqli($this->hostname, $this->db_username, $this->db_password, $this->dbname);
 
-        if(mysqli_connect_error()){
-            echo "error occurs connect";
-        }else{
-            echo "connected";
-        }
+        // if(mysqli_connect_error()){
+        //     echo "error occurs connect";
+        // }else{
+        //     echo "connected";
+        // }
 
         return $conn;
 

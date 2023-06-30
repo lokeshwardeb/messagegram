@@ -4,11 +4,16 @@
 
 
 body{
-    background-color: var(--custom-success-color) !important;
+    /* background-color: var(--custom-success-color) !important; */
 }
 ul li a {
     color: white !important;
     text-decoration: none;
     margin: 15px;
     line-height: 50px !important;
+}
+
+.cus-hover:hover{
+    background-color: #0D6EFD;
+    color: #FFFFFF !important;
 }
