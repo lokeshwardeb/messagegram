@@ -10,6 +10,7 @@ $Routes = [
     '/login' => __DIR__ . '/controllers/login.php',
     '/logout' => __DIR__ . '/controllers/logout.php',
     '/inbox_check' => __DIR__ . '/controllers/inbox_check.php',
+    '/my_profile' => __DIR__ . '/controllers/my_profile.php',
 ];
 
 // checking if the routes is registed on the the system

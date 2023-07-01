@@ -52,6 +52,7 @@ if(isset($_POST['create_new_account'])){
     $cpassword = $sql->html_special_chars($_POST['cpassword']);
     $user_img_main = $_FILES['user_img'];
     $user_img = $_FILES['user_img']['name'];
+    $user_img_tmp = $_FILES['user_img']['tmp_name'];
 
     $result = $sql->show_where("users", "username", "$username");
 
@@ -64,6 +65,10 @@ if(isset($_POST['create_new_account'])){
                 $hash = password_hash($password, PASSWORD_DEFAULT);
     
                 $sql->insert_all("users", "`username`, `user_email`, `password`, `img_name`", "'$username','$user_email', '$hash', '$user_img'");
+                
+                $desc_img = "assets/img/users_img/img/" . $username . "_" . time() . ".jpeg";
+
+                compress_image($user_img_tmp, "$desc_img", 60);
     
                 echo success_msg("Account has been created successfully");
             }else{

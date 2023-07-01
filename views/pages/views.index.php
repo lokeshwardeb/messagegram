@@ -33,6 +33,9 @@ require "inc/_view_more.php";
 
     <div class="container mt-4">
 <?php
+
+$active_class = 'dashboard';
+
 require "inc/navbar.php";
 
 
@@ -81,7 +84,17 @@ if($result->num_rows > 0){
         // getting the reciver username from the connected_username row
         $reciver_username = $row['connected_username'];
 
-        // displaying the username and the userimage from the row
+       $reciverusername_result =  $sql->show_where("users", "username", "$reciver_username");
+
+       if($reciverusername_result->num_rows > 0){
+        while($row = $reciverusername_result->fetch_assoc()){
+            $reciver_image = $row['img_name'];
+            // $reciver_username = $row['img_name'];
+        }
+       }
+
+        // $reciver_username = $row['connected_username'];
+       // displaying the username and the userimage from the row
         echo '
        
         
@@ -89,8 +102,8 @@ if($result->num_rows > 0){
      
 
         <td>
-        <a href = "/inbox_check?username='.$row['connected_username'].'">
-        <img src="'.$row['img_name'].'" width="50px" height="50px" alt="" srcset="" class="rounded-circle">'.$row['connected_username'].'
+        <a href = "/inbox_check?username='.$reciver_username.'">
+        <img src="assets/img/users_img/img/'.$reciver_image.'" width="50px" height="50px" alt="" srcset="" class="me-4 rounded-circle">'.$reciver_username.'
         </a>
         </td>';?>
 

@@ -53,6 +53,18 @@ class sql_get extends connect{
 
     }
     // SELECT * FROM `messages` WHERE sender_username = "Lokeshwar Deb" AND reciver_username = "Jhumur Roy" OR sender_username = "Jhumur Roy" AND reciver_username = "Lokeshwar Deb" ORDER BY `messages`.`id` DESC
+    function msg_table_or_inbox($table_name, $row_name1, $row_name_2, $row_name1_value, $row_name_2_value, $grab_point, $order_by = "ASC"){
+        $msg_inbox_sql = "SELECT * FROM `$table_name` WHERE `$row_name1` = '$row_name1_value' OR `$row_name_2` = '$row_name_2_value'  ORDER BY `$table_name`.`$grab_point` $order_by;";
+        $result = $this->connection()->query($msg_inbox_sql);
+        return $result;
+
+    }
+    function msg_table_inbox($table_name, $row_name1, $row_name_2, $row_name1_value, $row_name_2_value, $grab_point, $order_by = "ASC"){
+        $msg_inbox_sql = "SELECT * FROM `$table_name` WHERE `$row_name1` = '$row_name1_value' AND `$row_name_2` = '$row_name_2_value' OR `$row_name1` = '$row_name_2_value' AND `$row_name_2` = '$row_name1_value'  ORDER BY `$table_name`.`$grab_point` $order_by;";
+        $result = $this->connection()->query($msg_inbox_sql);
+        return $result;
+
+    }
     function msg_inbox($sender_username, $reciver_username, $order_by = "ASC"){
         $msg_inbox_sql = "SELECT * FROM `messages` WHERE `sender_username` = '$sender_username' AND `reciver_username` = '$reciver_username' OR `reciver_username` = '$sender_username' AND `sender_username` = '$reciver_username'  ORDER BY `messages`.`id` $order_by;";
         $result = $this->connection()->query($msg_inbox_sql);

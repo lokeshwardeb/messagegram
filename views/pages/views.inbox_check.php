@@ -20,11 +20,18 @@ $sql = new sql_get;
     </div> -->
 
 <style>
-    @media screen and (min-width: 1400px) {
+    @media screen and (max-width: 1400px) {
         /* .my_class{
                 margin-top: 500px !important;
             } */
+
+            .cus-disp-none{
+                display: none;
+            }
     }
+    /* .cus-disp-none{
+                display: none;
+            } */
 </style>
 
 <div class="container mt-4">
@@ -79,6 +86,26 @@ $sql = new sql_get;
                             $username = $_SESSION['username'];
 
 
+                            $loggedin_user_img_result = $sql->show_where("users", "username", "$username");
+
+                            if($loggedin_user_img_result->num_rows > 0){
+                                while($row = $loggedin_user_img_result->fetch_assoc()){
+                                    $loggedin_user_img_name = $row['img_name'];
+                                }
+                               }
+
+                               //    get_username
+                               // get the reciver user img name
+                               $reciver_user_img_result = $sql->show_where("users", "username", "$get_username");
+
+                            //    $reciver_user_img_result->fetch_assoc();
+                               if($reciver_user_img_result->num_rows > 0){
+                                while($row = $reciver_user_img_result->fetch_assoc()){
+                                    $reciver_user_img_name = $row['img_name'];
+                                }
+                               }
+
+
                             //  select from messages order by desc where username = current loggedin username and recived username = get username by get method
                             $result_msg_status = $sql->msg_inbox("$username", "$get_username", "DESC");
 
@@ -103,8 +130,8 @@ $sql = new sql_get;
                             $select_seen_status_by_id_value_reciever = $row['reciver_seen_status'];
                            
                             // get the  username values of seen_status row
-                           echo $sender_username_from_table = $row['sender_username'];
-                            echo $reciver_username_from_table = $row['reciver_username'];
+                            $sender_username_from_table = $row['sender_username'];
+                             $reciver_username_from_table = $row['reciver_username'];
 
 
                             if($username == $sender_username_from_table){
@@ -144,6 +171,11 @@ $sql = new sql_get;
                                     // check if the sender username is matching with the current loggedin username
                                     if ($row['sender_username'] == $username) {
 
+                                        // get the loggedin user img name
+                                       $loggedin_user_img_result = $sql->show_where("users", "username", "$username");
+
+                                      
+
                                         if($row['sender_seen_status'] !== 'seen'){
                                              // if it is matching then show its data with the text-primary color
                                         echo '
@@ -151,11 +183,11 @@ $sql = new sql_get;
                                            
                                         <div class = "d-flex float-end">
                                         <div class="shadow p-3 mb-5 me-4 text-primary bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
-                                        <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
+                                        <img src="assets/img/users_img/img/'.$loggedin_user_img_name.'" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
                                         </div>
                                        
                                         </div>
-                                        <div class="row">
+                                        <div class="row cus-disp-none">
                                             <div class="col-12 " style="margin-top: -40px;">
                                             <div class="float-end text-secondary">
                                                 (unseen by '.$username.')
@@ -174,14 +206,14 @@ $sql = new sql_get;
 
                                         <div class = "d-flex float-end">
                                         <div class="shadow p-3 mb-5 me-4 text-primary bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
-                                        <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
+                                        <img src="assets/img/users_img/img/'.$loggedin_user_img_name.'" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
                                         </div>
                                         
 
                                        
                                         
                                         </div>
-                                        <div class="row">
+                                        <div class="row cus-disp-none">
                                             <div class="col-12 " style="margin-top: -40px;">
                                             <div class="float-end text-secondary">
                                                 (seen by '.$username.')
@@ -205,12 +237,13 @@ $sql = new sql_get;
                                        <div class="col-12 ">
                                           
                                        <div class = "d-flex float-start">
+                                       <img src="assets/img/users_img/img/'.$reciver_user_img_name.'" class="me-4 rounded-circle" width="50px" height="50px" alt="" srcset="">
                                        <div class="shadow p-3 mb-5 me-4 text-dark bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
-                                       <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
+                                      
                                        </div>
                                       
                                        </div>
-                                       <div class="row">
+                                       <div class="row cus-disp-none">
                                            <div class="col-12 " style="margin-top: -40px;">
                                            <div class="float-start text-secondary">
                                                (unseen by '.$get_username.')
@@ -228,15 +261,16 @@ $sql = new sql_get;
                                         
 
                                        <div class = "d-flex float-start">
+                                       <img src="assets/img/users_img/img/'.$reciver_user_img_name.'" class="me-4 rounded-circle" width="50px" height="50px" alt="" srcset="">
                                        <div class="shadow p-3 mb-5 me-4 text-dark bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
-                                       <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
+                                      
                                        </div>
                                        
 
                                       
                                        
                                        </div>
-                                       <div class="row">
+                                       <div class="row cus-disp-none">
                                            <div class="col-12 " style="margin-top: -40px;">
                                            <div class="float-start text-secondary">
                                                (seen by '.$get_username.')
