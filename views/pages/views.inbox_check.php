@@ -158,7 +158,7 @@ $sql = new sql_get;
                                         <div class="row">
                                             <div class="col-12 " style="margin-top: -40px;">
                                             <div class="float-end text-secondary">
-                                                (unseen by sender)
+                                                (unseen by '.$username.')
                                             </div>    
                                             </div>
 
@@ -184,7 +184,7 @@ $sql = new sql_get;
                                         <div class="row">
                                             <div class="col-12 " style="margin-top: -40px;">
                                             <div class="float-end text-secondary">
-                                                (seen by sender)
+                                                (seen by '.$username.')
                                             </div>    
                                             </div>
 
@@ -205,7 +205,7 @@ $sql = new sql_get;
                                        <div class="col-12 ">
                                           
                                        <div class = "d-flex float-start">
-                                       <div class="shadow p-3 mb-5 me-4 text-primary bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
+                                       <div class="shadow p-3 mb-5 me-4 text-dark bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
                                        <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
                                        </div>
                                       
@@ -213,7 +213,7 @@ $sql = new sql_get;
                                        <div class="row">
                                            <div class="col-12 " style="margin-top: -40px;">
                                            <div class="float-start text-secondary">
-                                               (unseen by sender)
+                                               (unseen by '.$get_username.')
                                            </div>    
                                            </div>
 
@@ -228,7 +228,7 @@ $sql = new sql_get;
                                         
 
                                        <div class = "d-flex float-start">
-                                       <div class="shadow p-3 mb-5 me-4 text-primary bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
+                                       <div class="shadow p-3 mb-5 me-4 text-dark bg-body-tertiary rounded mt-0"> ' . $row['message'] . '</div>
                                        <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
                                        </div>
                                        
@@ -239,7 +239,7 @@ $sql = new sql_get;
                                        <div class="row">
                                            <div class="col-12 " style="margin-top: -40px;">
                                            <div class="float-start text-secondary">
-                                               (seen by sender)
+                                               (seen by '.$get_username.')
                                            </div>    
                                            </div>
 

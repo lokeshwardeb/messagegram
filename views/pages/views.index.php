@@ -118,7 +118,7 @@ if($result->num_rows > 0){
 // $reciver_username
 
 // checking if the current loggedin username is equals to the table reciver username
-if($username == $reciver_username_table){
+if($username == $reciver_username_table && $reciver_seen_status == ''){
     
         
         // then show the message with the bold style
@@ -139,6 +139,28 @@ if($username == $reciver_username_table){
         
         ;
     
+}
+if($username == $reciver_username_table && $reciver_seen_status !== ''){
+    
+        
+    // then show the message with the bold style
+    echo '
+
+    <td class="fw-normal">
+    <a href = "/inbox_check?username='.$reciver_username.'">
+    '.$row['message'].'
+    </a>
+    </td>
+    </tr>
+    
+    
+    </a>
+    
+    
+    '
+    
+    ;
+
 }
 
 // if loggedin username is equals to sender username from table
