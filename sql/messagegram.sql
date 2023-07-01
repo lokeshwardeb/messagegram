@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2023 at 10:23 PM
+-- Generation Time: Jul 01, 2023 at 08:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -53,6 +53,8 @@ CREATE TABLE `messages` (
   `sender_username` varchar(255) NOT NULL,
   `reciver_username` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
+  `sender_seen_status` varchar(255) NOT NULL,
+  `reciver_seen_status` varchar(255) NOT NULL,
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -60,29 +62,42 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `sender_username`, `reciver_username`, `message`, `datetime`) VALUES
-(1, 'p', 'd', 'd', '2023-06-30 18:50:08'),
-(2, 'Lokeshwar Deb', 'Jhumur Roy', 'This is a message', '2023-06-30 20:05:03'),
-(3, 'Lokeshwar Deb', 'Jhumur Roy', 'Lokeshwar Deb', '2023-06-30 21:41:36'),
-(4, 'Lokeshwar Deb', 'Jhumur Roy', 'Lokeshwar Deb', '2023-06-30 21:42:49'),
-(5, 'Lokeshwar Deb', 'Jhumur Roy', 'om namah shivay', '2023-06-30 21:43:32'),
-(6, 'Lokeshwar Deb', 'Jhumur Roy', 'om namah shivay', '2023-06-30 22:10:44'),
-(7, 'Lokeshwar Deb', 'Jhumur Roy', 'har har mahadeb', '2023-06-30 22:12:21'),
-(8, 'Jhumur Roy', 'Lokeshwar Deb', 'om namah shivay', '2023-06-30 22:13:10'),
-(9, 'Jhumur Roy', 'Lokeshwar Deb', 'dd', '2023-06-30 22:13:37'),
-(10, 'Jhumur Roy', 'Lokeshwar Deb', 'df', '2023-06-30 22:20:53'),
-(11, 'Jhumur Roy', 'Jhumur Roy', 'd', '2023-06-30 22:24:42'),
-(12, 'Jhumur Roy', 'Jhumur Roy', 's', '2023-06-30 22:25:50'),
-(13, 'Jhumur Roy', 'Jhumur Roy', 'e', '2023-06-30 22:33:42'),
-(14, 'Jhumur Roy', 'Jhumur Roy', 'de', '2023-06-30 22:36:21'),
-(15, 'Lokeshwar Deb', 'Jhumur Roy', 'd', '2023-06-30 22:38:34'),
-(16, 'Lokeshwar Deb', 'Jhumur Roy', 'w', '2023-06-30 22:43:31'),
-(17, 'Jhumur Roy', 'Lokeshwar Deb', 'From Jhumur', '2023-06-30 22:55:08'),
-(18, 'Lokeshwar Deb', 'Jhumur Roy', 'from lokeshwar\r\n', '2023-06-30 23:01:39'),
-(19, 'Lokeshwar Deb', 'Jhumur Roy', 'Hi Jhumur', '2023-07-01 01:14:47'),
-(20, 'Lokeshwar Deb', 'Jhumur Roy', 'sended', '2023-07-01 01:42:19'),
-(21, 'Jhumur Roy', 'Lokeshwar Deb', 'recived sended\r\n', '2023-07-01 01:43:13'),
-(22, 'Lokeshwar Deb', 'Jhumur Roy', 'thanks', '2023-07-01 02:19:00');
+INSERT INTO `messages` (`id`, `sender_username`, `reciver_username`, `message`, `sender_seen_status`, `reciver_seen_status`, `datetime`) VALUES
+(1, 'p', 'd', 'd', 'seen', '', '2023-06-30 18:50:08'),
+(2, 'Lokeshwar Deb', 'Jhumur Roy', 'This is a message', '', '', '2023-06-30 20:05:03'),
+(3, 'Lokeshwar Deb', 'Jhumur Roy', 'Lokeshwar Deb', '', '', '2023-06-30 21:41:36'),
+(4, 'Lokeshwar Deb', 'Jhumur Roy', 'Lokeshwar Deb', '', '', '2023-06-30 21:42:49'),
+(5, 'Lokeshwar Deb', 'Jhumur Roy', 'om namah shivay', '', '', '2023-06-30 21:43:32'),
+(6, 'Lokeshwar Deb', 'Jhumur Roy', 'om namah shivay', '', '', '2023-06-30 22:10:44'),
+(7, 'Lokeshwar Deb', 'Jhumur Roy', 'har har mahadeb', '', '', '2023-06-30 22:12:21'),
+(8, 'Jhumur Roy', 'Lokeshwar Deb', 'om namah shivay', '', '', '2023-06-30 22:13:10'),
+(9, 'Jhumur Roy', 'Lokeshwar Deb', 'dd', '', '', '2023-06-30 22:13:37'),
+(10, 'Jhumur Roy', 'Lokeshwar Deb', 'df', '', '', '2023-06-30 22:20:53'),
+(11, 'Jhumur Roy', 'Jhumur Roy', 'd', '', '', '2023-06-30 22:24:42'),
+(12, 'Jhumur Roy', 'Jhumur Roy', 's', '', '', '2023-06-30 22:25:50'),
+(13, 'Jhumur Roy', 'Jhumur Roy', 'e', '', '', '2023-06-30 22:33:42'),
+(14, 'Jhumur Roy', 'Jhumur Roy', 'de', '', '', '2023-06-30 22:36:21'),
+(15, 'Lokeshwar Deb', 'Jhumur Roy', 'd', '', '', '2023-06-30 22:38:34'),
+(16, 'Lokeshwar Deb', 'Jhumur Roy', 'w', '', '', '2023-06-30 22:43:31'),
+(17, 'Jhumur Roy', 'Lokeshwar Deb', 'From Jhumur', '', '', '2023-06-30 22:55:08'),
+(18, 'Lokeshwar Deb', 'Jhumur Roy', 'from lokeshwar\r\n', '', '', '2023-06-30 23:01:39'),
+(19, 'Lokeshwar Deb', 'Jhumur Roy', 'Hi Jhumur', '', '', '2023-07-01 01:14:47'),
+(20, 'Lokeshwar Deb', 'Jhumur Roy', 'sended', '', '', '2023-07-01 01:42:19'),
+(21, 'Jhumur Roy', 'Lokeshwar Deb', 'recived sended\r\n', '', '', '2023-07-01 01:43:13'),
+(22, 'Lokeshwar Deb', 'Jhumur Roy', 'thanks', '', '', '2023-07-01 02:19:00'),
+(23, 'Jhumur Roy', 'Lokeshwar Deb', 'ok no problem', '', '', '2023-07-01 10:09:45'),
+(24, 'Lokeshwar Deb', 'Jhumur Roy', 'thanks you too.', '', '', '2023-07-01 10:11:39'),
+(25, 'Lokeshwar Deb', 'Jhumur Roy', 'd', 'seen', 'seen', '2023-07-01 10:12:52'),
+(26, 'Jhumur Roy', 'Lokeshwar Deb', 'ok', 'seen', 'seen', '2023-07-01 10:13:48'),
+(27, 'Lokeshwar Deb', 'Jhumur Roy', 'ok that cool.', 'seen', 'seen', '2023-07-01 10:16:04'),
+(28, 'Jhumur Roy', 'Lokeshwar Deb', 'yes of course that&#039;s cool. !!', 'seen', 'seen', '2023-07-01 10:16:52'),
+(29, 'Lokeshwar Deb', 'Jhumur Roy', 'yea..', 'seen', '', '2023-07-01 10:18:19'),
+(30, 'Lokeshwar Deb', 'Jhumur Roy', 'this', 'seen', 'seen', '2023-07-01 11:05:37'),
+(31, 'Jhumur Roy', 'Lokeshwar Deb', 'thanks', 'seen', 'seen', '2023-07-01 11:23:05'),
+(32, 'Lokeshwar Deb', 'Jhumur Roy', 'ok,', 'seen', 'seen', '2023-07-01 11:32:34'),
+(33, 'Jhumur Roy', 'Lokeshwar Deb', 'thats great !!', 'seen', 'seen', '2023-07-01 11:37:54'),
+(34, 'Lokeshwar Deb', 'Jhumur Roy', 'ok', 'seen', 'seen', '2023-07-01 13:24:02'),
+(35, 'Jhumur Roy', 'Lokeshwar Deb', 'ok but is is not theh main gthejkjj dkjkdkjkfkn ffn f f f djfkdjk fjkjk ff', 'seen', 'seen', '2023-07-01 23:50:32');
 
 -- --------------------------------------------------------
 
@@ -107,8 +122,9 @@ INSERT INTO `users` (`id`, `username`, `user_email`, `password`, `img_name`, `da
 (1, 'fd', 'g', '', 'd', '2023-06-30 17:26:38'),
 (2, ',m,', 'lokeshwarfashionhouse@gmail.com', '$2y$10$mS8f5klhMuda19qSs/8ICeSMZo9ioezgMvcrdUKpQST/3/1Q8B7Q2', '', '2023-06-30 18:22:53'),
 (3, 'd', 'lokeshwarfashionhouse@gmail.com', '$2y$10$es1O9IZbTBz4yfuZhFCcReWU9MVZ.7I18AVebvZqkFBlqzo6Hc7E2', '', '2023-06-30 18:28:08'),
-(4, 'Lokeshwar Deb', 'lokeshwarfashionhouse@gmail.com', '$2y$10$Gb8XZFJczgjvfx5zg6mI6eZB9A5BwgMy82QTgEwWpPqK7j8V/P9Qm', '', '2023-06-30 20:01:28'),
-(5, 'Jhumur Roy', 'jhumurroy22@gmail.com', '$2y$10$h/8DxoIJCRSET3rnCsx4OOgB/IzYznKRgonHYtSej4/0e0zY.o0Li', '', '2023-06-30 20:01:51');
+(4, 'Lokeshwar Deb', 'lokeshwarfashionhouse@gmail.com', '$2y$10$Gb8XZFJczgjvfx5zg6mI6eZB9A5BwgMy82QTgEwWpPqK7j8V/P9Qm', 'Lokeshwar Deb_1688234245.jpeg', '2023-06-30 20:01:28'),
+(5, 'Jhumur Roy', 'jhumurroy22@gmail.com', '$2y$10$h/8DxoIJCRSET3rnCsx4OOgB/IzYznKRgonHYtSej4/0e0zY.o0Li', 'Jhumur Roy_1688232553.jpeg', '2023-06-30 20:01:51'),
+(6, 'Jhumur Roy (Beauty)', 'lokeshwarfashionhouse@gmail.com', '$2y$10$ckLUhjA/jcz6oeU82.jY3.spV8ZvaZ/D3QURO000h2MMU8/OekwAC', 'Jhumur Roy (Beauty)_1688227198.jpeg', '2023-07-01 21:53:25');
 
 --
 -- Indexes for dumped tables
@@ -146,13 +162,13 @@ ALTER TABLE `chat_users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
