@@ -29,7 +29,7 @@ class sql_get extends connect{
 
     }
     function update_all($table_name, $update_rows_and_values, $grab_point, $grab_point_value){
-        $update_all_sql = "UPDATE `$table_name` SET $update_rows_and_values WHERE `$grab_point` = '$grab_point_value';";
+        $update_all_sql = "UPDATE `$table_name` SET $update_rows_and_values WHERE `$table_name`.`$grab_point` = '$grab_point_value';";
         $result = $this->connection()->query($update_all_sql);
         return $result;
 
@@ -52,8 +52,9 @@ class sql_get extends connect{
         return $result;
 
     }
-    function msg_inbox($sender_username, $reciver_username){
-        $msg_inbox_sql = "SELECT * FROM `messages` WHERE `sender_username` = '$sender_username' AND `reciver_username` = '$reciver_username' OR `reciver_username` = '$sender_username' AND `sender_username` = '$reciver_username';";
+    // SELECT * FROM `messages` WHERE sender_username = "Lokeshwar Deb" AND reciver_username = "Jhumur Roy" OR sender_username = "Jhumur Roy" AND reciver_username = "Lokeshwar Deb" ORDER BY `messages`.`id` DESC
+    function msg_inbox($sender_username, $reciver_username, $order_by = "ASC"){
+        $msg_inbox_sql = "SELECT * FROM `messages` WHERE `sender_username` = '$sender_username' AND `reciver_username` = '$reciver_username' OR `reciver_username` = '$sender_username' AND `sender_username` = '$reciver_username'  ORDER BY `messages`.`id` $order_by;";
         $result = $this->connection()->query($msg_inbox_sql);
         return $result;
 

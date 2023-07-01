@@ -19,9 +19,9 @@ $sql = new sql_get;
 
     <style>
         @media screen and (min-width: 1400px){
-            .my_class{
+            /* .my_class{
                 margin-top: 500px !important;
-            }
+            } */
         }
     </style>
 
@@ -62,45 +62,11 @@ require "inc/_user_loggedin_title_bar.php";
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">hi</div>
             </div> -->
 
-            <div class="d-flex float-start">
-                <div class="row">
-                <?php
-
-
- $get_username = $sql->html_special_chars($_GET['username']);
-
- $username = $_SESSION['username'];
-
-// $result_select_sender = $sql->show_where("messages", "sender_username", "$username");
-// $result_select_reciver = $sql->show_where("messages", "reciver_username", "$get_username");
-
-// if($result_select_sender->num_rows > 0){
-
-
-$result_msg_reciver = $sql->msg_one_inbox("$get_username", "$username");
-
-if($result_msg_reciver->num_rows > 0){
-    while($row = $result_msg_reciver->fetch_assoc()){
-        echo '
-        <div class="col-12 d-inline">
-        <div class = "d-flex">
-        <img src="d.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
-
-        <div class="shadow p-3 mb-5 text-dark bg-body-tertiary rounded mt-0">'.$row['message'].'</div>
-        </div>
-      </div>
-';
-    }
-}
-
-
-?>
-                </div>
-                
-            </div>
            
-            <div class="d-flex my_class float-end">
-                <div class="">
+           
+            <div class="my_class ">
+                <!-- initialized the row class and the col-12 class on the children div to maintain design -->
+                <div class="row">
 
 <?php
 
@@ -108,43 +74,47 @@ if($result_msg_reciver->num_rows > 0){
 
  $username = $_SESSION['username'];
 
-// $result_select_sender = $sql->show_where("messages", "sender_username", "$username");
-// $result_select_reciver = $sql->show_where("messages", "reciver_username", "$get_username");
-
-// if($result_select_sender->num_rows > 0){
 
 
-// $result_msg_reciver = $sql->msg_one_inbox("$get_username", "$username");
-
-// if($result_msg_reciver->num_rows > 0){
-//     while($row = $result_msg_reciver->fetch_assoc()){
-//         echo '
-//         <div class=" d-inline">
-//         <div class = "d-flex">
-//         <div class="shadow p-3 mb-5 text-dark bg-body-tertiary rounded mt-0">'.$row['message'].'</div>
-//         <img src="d.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
-//         </div>
-//       </div>
-// ';
-//     }
-// }
-
-   
+//  initializing all the message datas with the username and the reciver username
         // $result_msg = $sql->msg_inbox("$username", "$get_username");
-        $result_msg_sender = $sql->msg_one_inbox("$username", "$get_username");
+        $result_msg_sender = $sql->msg_inbox("$username", "$get_username");
 
+        // if there contains any data to the database
         if($result_msg_sender->num_rows > 0){
+            // then get all the data as associative array and show this with the help of while loop
             while($row = $result_msg_sender->fetch_assoc()){
+                // check if the sender username is matching with the current loggedin username
+               if($row['sender_username'] == $username) {
+                // if it is matching then show its data with the text-primary color
                 echo '
-                <div class="col-12 d-inline ">
-                <div class = "d-flex ">
-                <div class="shadow p-3 mb-5 text-primary bg-body-tertiary rounded mt-0">'.$row['message'].'</div>
-                <img src="d.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
+                <div class="col-12 ">
+                <div class = "d-flex float-end">
+                <div class="shadow p-3 mb-5 me-4 text-primary bg-body-tertiary rounded mt-0"> '.$row['message'].'</div>
+                <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
                 </div>
               </div>
     ';
+            }
+            // or else it is not matching that means the data is not send by the loggedin user but it has been sent from the connected user and recived by the current loggedin user
+            else{
+                // in that case show the data with the text-dark color
+                echo '
+                <div class="col-12 ">
+                <div class = "d-flex float-start">
+                <img src="../../assets/img/IMG_20230214_124527_9 - Copy.png" class="me-4 rounded-circle" width="50px" height="50px" alt="" srcset="">
+
+                    <div class="shadow p-3 mb-5 text-dark bg-body-tertiary rounded mt-0"> '.$row['message'].'</div>
+                </div>
+               
+               
+              </div>
+    ';
+            }
+             
        
         }
+       
        
     // }
     
@@ -152,22 +122,11 @@ if($result_msg_reciver->num_rows > 0){
   
 
 }
-// elseif($result_select_reciver->num_rows > 0){
-//     $result = $sql->msg_inbox("$username", "$get_username");
+ // and if there is no data found on the database then show the message that no data found
+ else{
+    error_msg("No message data found !");
+ }
 
-//     if($result->num_rows > 0){
-//         while($row = $result->fetch_assoc()){
-//             echo '   
-//             <div class="col-12">
-//             <div class="shadow p-3 mb-5 text-dark bg-body-tertiary rounded mt-0">'.$row['message'].'</div>
-//             <img src="d.png" class="rounded-circle" width="50px" height="50px" alt="" srcset="">
-//             </div>
-// ';
-//         }
-//     }else{
-//         echo "no message found";
-//     }
-// }
 
 
 
@@ -183,7 +142,7 @@ if(isset($_POST['send'])){
 
     echo '
     <script>
-    window.location.href = "inbox?username='.$get_username.'"
+    window.location.href = "inbox_check?username='.$get_username.'"
     </script>
     ';
 
